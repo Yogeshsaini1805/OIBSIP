@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Web App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>To-Do List Web App</h1>
+            <p class="subtitle">Organize Your Daily Tasks</p>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Add Task Form -->
+            <aside class="sidebar">
+                <div class="form-card">
+                    <h2>Add New Task</h2>
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label for="taskTitle">Title *</label>
+                            <input 
+                                type="text" 
+                                id="taskTitle" 
+                                placeholder="Enter task title" 
+                                required
+                            >
+                            <span class="error-msg" id="titleError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskDescription">Description</label>
+                            <textarea 
+                                id="taskDescription" 
+                                placeholder="Enter task description" 
+                                rows="5"
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taskDate">Due Date</label>
+                            <input 
+                                type="date" 
+                                id="taskDate"
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-save">Save Task</button>
+                    </form>
+                </div>
+
+                <!-- Stats Card -->
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Tasks</span>
+                        <span class="stat-value" id="totalTasks">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Pending</span>
+                        <span class="stat-value pending" id="pendingCount">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed</span>
+                        <span class="stat-value completed" id="completedCount">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Pending Tasks Section -->
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2>Pending Tasks</h2>
+                        <span class="badge" id="pendingBadge">0</span>
+                    </div>
+
+                    <div class="tasks-list pending-list" id="pendingTasksList">
+                        <div class="empty-state">
+                            <p>✓ No pending tasks! You're all caught up.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Completed Tasks Section -->
+                <section class="tasks-section completed-section">
+                    <div class="section-header">
+                        <h2>Completed Tasks</h2>
+                        <span class="badge completed" id="completedBadge">0</span>
+                    </div>
+
+                    <div class="tasks-list completed-list" id="completedTasksList">
+                        <div class="empty-state">
+                            <p>No completed tasks yet.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Clear All Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-clear" id="clearPending" style="display: none;">Clear All Pending</button>
+                    <button class="btn btn-clear" id="clearCompleted" style="display: none;">Clear All Completed</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Task</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editTitle">Title *</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editDate">Due Date</label>
+                    <input type="date" id="editDate">
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-save">Update Task</button>
+                    <button type="button" class="btn btn-cancel" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
