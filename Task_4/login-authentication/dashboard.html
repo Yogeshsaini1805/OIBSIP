@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔐 Secure Dashboard</h1>
+            </div>
+            <div class="nav-right">
+                <div class="user-info">
+                    <span class="user-name" id="userName">User</span>
+                    <span class="user-email" id="userEmail">user@example.com</span>
+                </div>
+                <button class="btn btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <div class="menu-item active" onclick="showSection('profile')">
+                    <span>👤</span>
+                    <span>Profile</span>
+                </div>
+                <div class="menu-item" onclick="showSection('settings')">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </div>
+                <div class="menu-item" onclick="showSection('security')">
+                    <span>🛡️</span>
+                    <span>Security</span>
+                </div>
+                <div class="menu-item" onclick="showSection('activity')">
+                    <span>📊</span>
+                    <span>Activity</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Profile Section -->
+            <section id="profile" class="content-section active">
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder" id="avatarPlaceholder"></div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <p id="profileName">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Email Address</label>
+                            <p id="profileEmail">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Member Since</label>
+                            <p id="profileDate">-</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Account Status</label>
+                            <p><span class="badge success">Active</span></p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="openEditModal()">Edit Profile</button>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Email Notifications</h3>
+                            <p>Receive email notifications for account activities</p>
+                        </div>
+                        <input type="checkbox" class="toggle-switch" checked>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Two-Factor Authentication</h3>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <input type="checkbox" class="toggle-switch">
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <h3>Dark Mode</h3>
+                            <p>Switch to dark theme</p>
+                        </div>
+                        <input type="checkbox" class="toggle-switch">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section id="security" class="content-section">
+                <div class="section-header">
+                    <h2>Security</h2>
+                </div>
+                <div class="security-group">
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h3>Password</h3>
+                            <p>Last changed: <span id="lastPasswordChange">Never</span></p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="openChangePasswordModal()">Change Password</button>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h3>Login History</h3>
+                            <p>View your recent login activities</p>
+                        </div>
+                        <button class="btn btn-secondary">View History</button>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h3>Active Sessions</h3>
+                            <p>Manage your active sessions</p>
+                        </div>
+                        <button class="btn btn-secondary">Manage Sessions</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Section -->
+            <section id="activity" class="content-section">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-time">Just now</div>
+                        <div class="activity-desc">Account login</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">Account created</div>
+                        <div class="activity-desc">New account registration</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <button class="modal-close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editName">Full Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="modal-close" onclick="closeChangePasswordModal()">&times;</button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                    <span class="error-msg" id="currentPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" required>
+                    <span class="error-msg" id="confirmNewPasswordError"></span>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeChangePasswordModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
